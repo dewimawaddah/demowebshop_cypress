@@ -16,6 +16,8 @@ describe("template spec", () => {
       cy.input("#ConfirmPassword", datauser.confirmPassword);
       cy.clickbtn("#register-button");
       cy.validateText(".result", "Your registration completed");
+      cy.wait(1000);
+      cy.get(".ico-logout").click();
     });
   });
 
@@ -31,6 +33,7 @@ describe("template spec", () => {
         cy.input("#Password", datauser.password);
         cy.input("#ConfirmPassword", datauser.confirmPassword);
         cy.clickbtn("#register-button");
+        cy.wait(1000);
         cy.validateText(datauser.errorLocator, datauser.errorMessage);
       });
     });

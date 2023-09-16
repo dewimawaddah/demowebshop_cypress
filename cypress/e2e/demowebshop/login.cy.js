@@ -17,4 +17,18 @@ describe("template spec", () => {
       cy.get(".ico-logout").click();
     });
   });
+
+  it.only("failed login", () => {
+    cy.fixture("failed_login.json").then((user) => {
+      cy.get(".ico-login").click();
+      user.fail_login.forEach((datauser) => {
+        cy.url().should("include", "/login");
+        cy.input("#Email", datauser.email);
+        cy.input("#Password", datauser.password);
+        cy.clickbtn("form > .buttons > .button-1");
+        cy.wait(1000);
+        cy.validateText(datauser.errorLocator, datauser.errorMessage);
+      });
+    });
+  });
 });

@@ -1,0 +1,22 @@
+{
+    "fail_login" : [
+        {
+            "email" : "dewisqaa@gmail.com",
+            "password" : "123456",
+            "errorLocator" : ".validation-summary-errors > span",
+            "errorMessage" : "Login was unsuccessful. Please correct the errors and try again."
+        },
+        {
+            "email" : "dewisqa@gmail.com",
+            "password" : "654321",
+            "errorLocator" : ".validation-summary-errors > ul > li",
+            "errorMessage" : "The credentials provided are incorrect"
+        },
+        {
+            "email" : "dewim@gmail.com",
+            "password" : "asd123",
+            "errorLocator" : ".validation-summary-errors > ul > li",
+            "errorMessage" : "No customer account found"
+        }
+    ]
+}
