@@ -3,27 +3,34 @@ describe("template spec", () => {
     cy.visit(Cypress.env("demowebshop_url"));
   });
 
-  it("success register", () => {
+  it.only("success register", () => {
     cy.fixture("success_register.json").then((user) => {
       const datauser = user[0];
       cy.get(".ico-register").click();
       cy.url().should("include", "/register");
       cy.get("#gender-female").click();
-      cy.regis(datauser);
+      cy.input("#FirstName", datauser.firstname);
+      cy.input("#LastName", datauser.lastname);
+      cy.input("#Email", datauser.email);
+      cy.input("#Password", datauser.password);
+      cy.input("#ConfirmPassword", datauser.confirmPassword);
       cy.clickbtn("#register-button");
       cy.validateText(".result", "Your registration completed");
     });
   });
 
-  it.only("failed register", () => {
+  it("failed register", () => {
     cy.fixture("failed_register.json").then((user) => {
       cy.get(".ico-register").click();
       user.failed_regis.forEach((datauser) => {
         cy.url().should("include", "/register");
         cy.get("#gender-female").click();
-        cy.regis(datauser);
+        cy.input("#FirstName", datauser.firstname);
+        cy.input("#LastName", datauser.lastname);
+        cy.input("#Email", datauser.email);
+        cy.input("#Password", datauser.password);
+        cy.input("#ConfirmPassword", datauser.confirmPassword);
         cy.clickbtn("#register-button");
-        cy.wait(1000);
         cy.validateText(datauser.errorLocator, datauser.errorMessage);
       });
     });

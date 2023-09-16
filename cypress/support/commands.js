@@ -8,33 +8,6 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
-Cypress.Commands.add("regis", (datauser) => {
-  if (datauser.firstname != null) {
-    cy.get("#FirstName").clear().type(datauser.firstname);
-  } else {
-    cy.get("#FirstName").clear();
-  }
-  if (datauser.lastname != null) {
-    cy.get("#LastName").clear().type(datauser.lastname);
-  } else {
-    cy.get("#LastName").clear();
-  }
-  if (datauser.email != null) {
-    cy.get("#Email").clear().type(datauser.email);
-  } else {
-    cy.get("#Email").clear();
-  }
-  if (datauser.password != null) {
-    cy.get("#Password").clear().type(datauser.password);
-  } else {
-    cy.get("#Password").clear();
-  }
-  if (datauser.confirmPassword != null) {
-    cy.get("#ConfirmPassword").clear().type(datauser.confirmPassword);
-  } else {
-    cy.get("#ConfirmPassword").clear();
-  }
-});
 
 Cypress.Commands.add("clickbtn", (locator) => {
   cy.get(locator).should("be.visible").click();
@@ -42,6 +15,14 @@ Cypress.Commands.add("clickbtn", (locator) => {
 
 Cypress.Commands.add("validateText", (locator, value) => {
   cy.get(locator).should("contain.text", value);
+});
+
+Cypress.Commands.add("input", (locator, value) => {
+  if (value !== null) {
+    cy.get(locator).clear().type(value);
+  } else {
+    cy.get(locator).clear();
+  }
 });
 
 //
