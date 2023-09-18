@@ -5,7 +5,7 @@ describe("template spec", () => {
     cy.visit(Cypress.env("demowebshop_url"));
   });
 
-  it.only("success register with POM", () => {
+  it("success register with POM", () => {
     const register = new RegisterPage();
     register.visitRegisterPage();
     cy.fixture("success_register.json").then((user) => {

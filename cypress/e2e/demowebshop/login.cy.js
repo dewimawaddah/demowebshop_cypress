@@ -1,33 +1,34 @@
+import LoginPage from "../../support/pageObject/loginPage.cy";
+
 describe("template spec", () => {
   beforeEach(() => {
     cy.visit(Cypress.env("demowebshop_url"));
   });
 
   it("success login", () => {
+    const login = new LoginPage();
+    login.visitLoginPage();
     cy.fixture("success_login.json").then((user) => {
-      cy.get(".ico-login").click();
-      cy.url().should("include", "/login");
-      cy.input("#Email", user.email);
-      cy.input("#Password", user.password);
-      cy.clickbtn("form > .buttons > .button-1");
-      cy.validateText(
-        ".header-links > ul > :nth-child(1) > .account",
-        user.email
-      );
-      cy.get(".ico-logout").click();
+      login.assertURL();
+      login.inputEmail(user.email);
+      login.inputPassword(user.password);
+      login.clickButtonLogin();
+      login.assertLoginSuccess(user.email);
+      login.clickButtonLogout();
     });
   });
 
-  it.only("failed login", () => {
+  it("failed login", () => {
+    const login = new LoginPage();
+    login.visitLoginPage();
     cy.fixture("failed_login.json").then((user) => {
-      cy.get(".ico-login").click();
       user.fail_login.forEach((datauser) => {
-        cy.url().should("include", "/login");
-        cy.input("#Email", datauser.email);
-        cy.input("#Password", datauser.password);
-        cy.clickbtn("form > .buttons > .button-1");
+        login.assertURL();
+        login.inputEmail(datauser.email);
+        login.inputPassword(datauser.password);
+        login.clickButtonLogin();
         cy.wait(1000);
-        cy.validateText(datauser.errorLocator, datauser.errorMessage);
+        login.assertLoginFailed(datauser.errorLocator, datauser.errorMessage);
       });
     });
   });
