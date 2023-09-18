@@ -1,0 +1,44 @@
+{
+    "failed_regis" : [
+        {
+            "firstname" : "Dewi",
+            "lastname" : "Testing",
+            "email" : "dewi@gmail.com",
+            "password" : "123456",
+            "confirmPassword" : "123456",
+            "errorLocator": ".validation-summary-errors > ul > li",
+            "errorMessage" : "The specified email already exists"
+        },
+
+        {
+            "firstname" : null,
+            "lastname" : "Testing",
+            "email" : "dewiaja@gmail.com",
+            "password" : "123456",
+            "confirmPassword" : "123456",
+            "errorLocator": ".field-validation-error > span",
+            "errorMessage" : "First name is required."
+        },
+
+        {
+            "firstname" : "Dewi",
+            "lastname" : "Testing",
+            "email" : "dewitesting@gmail.com",
+            "password" : null,
+            "confirmPassword" : "123456",
+            "errorLocator": ":nth-child(1) > .field-validation-error > span",
+            "errorMessage" : "Password is required."
+        },
+
+        {
+            "firstname" : "Dewi",
+            "lastname" : "Testing",
+            "email" : "dewitesting@gmail.com",
+            "password" : 22,
+            "confirmPassword" : 123123123,
+            "errorLocator": ":nth-child(2) > .field-validation-error > span",
+            "errorMessage" : "The password and confirmation password do not match."
+        }
+
+    ]
+}
